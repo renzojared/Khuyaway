@@ -1,4 +1,4 @@
-namespace Khuyaway.Abstractions;
+namespace Khuyaway.Common;
 
 public abstract class ChainHandler<TInput>
 {
