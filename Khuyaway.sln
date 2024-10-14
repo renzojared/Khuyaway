@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khuyaway.Common", "src\pack
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khuyaway.Boundaries", "src\package\Khuyaway.Boundaries\Khuyaway.Boundaries.csproj", "{808E0677-9392-4CE7-BA1B-DFF7C17EC441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khuyaway.Boundaries.Abstractions", "src\package\Khuyaway.Boundaries.Abstractions\Khuyaway.Boundaries.Abstractions.csproj", "{E51C7A23-CAC9-4BB9-A884-71844D438E8F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khuyaway.EntityFrameworkCore", "src\package\Khuyaway.EntityFrameworkCore\Khuyaway.EntityFrameworkCore.csproj", "{27083B5C-4060-4479-8FCE-67A0EF2A582D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khuyaway.EntityFrameworkCore.Abstractions", "src\package\Khuyaway.EntityFrameworkCore.Abstractions\Khuyaway.EntityFrameworkCore.Abstractions.csproj", "{2D88F9CF-DFDA-436F-8EAA-F11F4195693F}"
@@ -72,7 +70,6 @@ Global
 		{FA02AE22-6F4E-4D1F-8AF9-ECFCBAEB50A0} = {AD84DDFE-70F5-43CF-A194-519CE4EEF4D0}
 		{1C29078F-0B26-43ED-90E3-3A16A5002D1E} = {48547A25-C393-4AE6-A448-DA9B8ACB3045}
 		{034AE215-9A34-412C-B0A4-FE3D7032D723} = {1C29078F-0B26-43ED-90E3-3A16A5002D1E}
-		{E51C7A23-CAC9-4BB9-A884-71844D438E8F} = {48547A25-C393-4AE6-A448-DA9B8ACB3045}
 		{1AAA15AE-2D1E-4904-8218-2912FF0922D7} = {48547A25-C393-4AE6-A448-DA9B8ACB3045}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -84,10 +81,6 @@ Global
 		{808E0677-9392-4CE7-BA1B-DFF7C17EC441}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{808E0677-9392-4CE7-BA1B-DFF7C17EC441}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{808E0677-9392-4CE7-BA1B-DFF7C17EC441}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E51C7A23-CAC9-4BB9-A884-71844D438E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E51C7A23-CAC9-4BB9-A884-71844D438E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E51C7A23-CAC9-4BB9-A884-71844D438E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E51C7A23-CAC9-4BB9-A884-71844D438E8F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27083B5C-4060-4479-8FCE-67A0EF2A582D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27083B5C-4060-4479-8FCE-67A0EF2A582D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27083B5C-4060-4479-8FCE-67A0EF2A582D}.Release|Any CPU.ActiveCfg = Release|Any CPU
