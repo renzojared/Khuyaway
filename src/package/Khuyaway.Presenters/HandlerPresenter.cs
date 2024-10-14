@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Khuyaway.Presenters;
 
-public class HandlerPresenter<TResponse>(IOptions<ResultMessage> options) : IHandlerPresenter<TResponse>
+internal class HandlerPresenter<TResponse>(IOptions<ResultMessage> options) : IHandlerPresenter<TResponse>
 {
     public Task<IResult> SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default)
         => Task.FromResult(Results.Ok(response));

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Khuyaway.Abstractions;
 
-public class ValidateHandler<TInput, TRequest, TResponse>(
+internal class ValidateHandler<TInput, TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators,
     IHandlerPresenter<TResponse> presenter) : IValidateHandler<TInput, TRequest>
     where TInput : class, IRequest<TRequest>
