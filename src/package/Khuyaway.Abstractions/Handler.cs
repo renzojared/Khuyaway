@@ -19,27 +19,28 @@ public abstract class Handler<TInput, TRequest, TResponse>(
     {
         try
         {
-            if (!await SuccessfullyValidatedAsync(input, cancellationToken)) return Result;
+            var validatedAsync = await SuccessfullyValidatedAsync(input, cancellationToken);
+            if (!validatedAsync.resume) return validatedAsync.result;
 
             var response = await HandleUseCaseAsync(input, cancellationToken);
 
-            if (!await CheckAndSetErrorsAsync(cancellationToken)) return Result;
+            var validatedAgainAsync = await CheckAndSetErrorsAsync();
+            if (!validatedAgainAsync.resume) return validatedAgainAsync.result;
 
-            await SuccessAsync(response, cancellationToken);
-            return Result;
+            return await SuccessAsync(response);
         }
         catch (Exception e)
         {
-            await ServerError(e, cancellationToken);
-            return Result;
+            return await ServerError(e);
         }
     }
 
     protected abstract Task<TResponse> HandleUseCaseAsync(TInput input, CancellationToken cancellationToken = default);
 
-    private async Task<bool> SuccessfullyValidatedAsync(TInput input, CancellationToken cancellationToken = default)
+    private async Task<(bool resume, IResult? result)> SuccessfullyValidatedAsync(TInput input,
+        CancellationToken cancellationToken = default)
     {
-        if (!validators.Any()) return true;
+        if (!validators.Any()) return (true, default);
 
         var results = await Task.WhenAll(validators.Select(s => s.ValidateAsync(input.Request, cancellationToken)));
 
@@ -48,14 +49,9 @@ public abstract class Handler<TInput, TRequest, TResponse>(
             .SelectMany(s => s.Errors)
             .ToList();
 
-        return await CheckAndSetErrorsAsync(cancellationToken);
+        return await CheckAndSetErrorsAsync();
     }
 
-    private async Task<bool> CheckAndSetErrorsAsync(CancellationToken cancellationToken = default)
-    {
-        if (Errors.Count == 0) return true;
-
-        await ValidationError(Errors, cancellationToken);
-        return false;
-    }
+    private async Task<(bool resume, IResult? result)> CheckAndSetErrorsAsync()
+        => Errors.Count == 0 ? (true, default) : (false, await ValidationError(Errors));
 }
