@@ -8,9 +8,7 @@ namespace Khuyaway.Presenters;
 public class HandlerPresenter<TResponse>(IOptions<ResultMessage> options) : IHandlerPresenter<TResponse>
 {
     public IResult Result { get; private set; }
-
-    public void SetResult(in IResult result) => Result = result;
-
+    
     public Task SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default)
     {
         Result = Results.Ok(response);
