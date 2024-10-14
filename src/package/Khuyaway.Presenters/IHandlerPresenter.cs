@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Khuyaway.Presenters;
 
-public interface IErrorPresenter
+public interface IHandlerPresenter
 {
     public IResult Result { get; }
 

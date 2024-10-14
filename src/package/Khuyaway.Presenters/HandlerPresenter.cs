@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Khuyaway.Presenters;
 
-public class ErrorPresenter(IOptions<ResultMessage> options) : IErrorPresenter
+public class HandlerPresenter(IOptions<ResultMessage> options) : IHandlerPresenter
 {
     public IResult Result { get; private set; }
 
