@@ -5,12 +5,10 @@ namespace Khuyaway.Presenters;
 
 public interface IHandlerPresenter<TResponse>
 {
-    public IResult Result { get; }
+    Task<IResult> SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default);
 
-    Task SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default);
-
-    Task ValidationErrorAsync(in IEnumerable<ValidationFailure> failures,
+    Task<IResult> ValidationErrorAsync(in IEnumerable<ValidationFailure> failures,
         in CancellationToken cancellationToken = default);
 
-    Task ServerErrorAsync(in Exception exception, in CancellationToken cancellationToken = default);
+    Task<IResult> ServerErrorAsync(in Exception exception, in CancellationToken cancellationToken = default);
 }
