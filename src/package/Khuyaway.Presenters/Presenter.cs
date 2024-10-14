@@ -11,13 +11,14 @@ public abstract class Presenter<TResponse>(IOptions<ResultMessage> options)
     //TODO: Factory ??
     public IResult Result { get; protected set; }
 
-    public virtual Task SuccessAsync(in TResponse? response)
+    public virtual Task SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default)
     {
         Result = Results.Ok(response);
         return Task.CompletedTask;
     }
 
-    public virtual Task ValidationError(in IEnumerable<ValidationFailure> failures)
+    public virtual Task ValidationError(in IEnumerable<ValidationFailure> failures,
+        CancellationToken cancellationToken = default)
     {
         Result = Results.ValidationProblem(
             failures.GroupBy(s => s.PropertyName, s => s.ErrorMessage).ToDictionary(g => g.Key, g => g.ToArray()),
@@ -29,7 +30,7 @@ public abstract class Presenter<TResponse>(IOptions<ResultMessage> options)
         return Task.CompletedTask;
     }
 
-    public virtual Task ServerError(in Exception e)
+    public virtual Task ServerError(in Exception e, CancellationToken cancellationToken = default)
     {
         Result = Results.Problem(new ProblemDetails()
         {
