@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Khuyaway.Presenters;
 
-public interface IHandlerPresenter
+public interface IHandlerPresenter<TResponse>
 {
     public IResult Result { get; }
 
-    void SetResult(in IResult result);
+    Task SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default);
 
     Task ValidationErrorAsync(in IEnumerable<ValidationFailure> failures,
         in CancellationToken cancellationToken = default);
