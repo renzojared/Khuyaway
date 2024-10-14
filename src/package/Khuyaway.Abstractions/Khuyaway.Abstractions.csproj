@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Khuyaway.Boundaries\Khuyaway.Boundaries.csproj" />
+      <ProjectReference Include="..\Khuyaway.Presenters\Khuyaway.Presenters.csproj" />
+    </ItemGroup>
+
 </Project>

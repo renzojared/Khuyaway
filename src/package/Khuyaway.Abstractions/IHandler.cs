@@ -1,7 +1,7 @@
 using Khuyaway.Common;
 using Microsoft.AspNetCore.Http;
 
-namespace Khuyaway.Boundaries.Abstractions;
+namespace Khuyaway.Abstractions;
 
 public interface IHandler<in TInput, TRequest>
     where TInput : class, IRequest<TRequest>

@@ -5,7 +5,7 @@ using Khuyaway.Presenters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
-namespace Khuyaway.Boundaries.Abstractions;
+namespace Khuyaway.Abstractions;
 
 public abstract class Handler<TInput, TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators,
