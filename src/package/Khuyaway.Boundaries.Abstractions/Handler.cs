@@ -2,33 +2,36 @@ using FluentValidation;
 using FluentValidation.Results;
 using Khuyaway.Common;
 using Khuyaway.Presenters;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace Khuyaway.Boundaries.Abstractions;
 
 public abstract class Handler<TInput, TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators,
-    IOptions<ResultMessage> options) : Presenter<TResponse>(options), IInputPort<TInput>
+    IOptions<ResultMessage> options) : Presenter<TResponse>(options), IHandler<TInput, TRequest>
     where TInput : class, IRequest<TRequest>
     where TRequest : class
 {
     protected List<ValidationFailure> Errors { get; set; } = [];
 
-    public async Task HandleAsync(TInput input, CancellationToken cancellationToken = default)
+    public async Task<IResult> HandleAsync(TInput input, CancellationToken cancellationToken = default)
     {
         try
         {
-            if (!await SuccessfullyValidatedAsync(input, cancellationToken)) return;
+            if (!await SuccessfullyValidatedAsync(input, cancellationToken)) return Result;
 
             var response = await HandleUseCaseAsync(input, cancellationToken);
 
-            if (!await CheckAndSetErrorsAsync(cancellationToken)) return;
+            if (!await CheckAndSetErrorsAsync(cancellationToken)) return Result;
 
             await SuccessAsync(response, cancellationToken);
+            return Result;
         }
         catch (Exception e)
         {
             await ServerError(e, cancellationToken);
+            return Result;
         }
     }
 
