@@ -5,17 +5,10 @@ using Microsoft.Extensions.Options;
 
 namespace Khuyaway.Presenters;
 
-public abstract class Presenter<TResponse>(IOptions<ResultMessage> options)
+public abstract class Presenter<TResponse>(IOptions<ResultMessage> options) : SuccessPresenter<TResponse>
 {
     //TODO: Custom responses and logger (e.InnerException?.Message ?? e.Message)
     //TODO: Factory ??
-    public IResult Result { get; protected set; }
-
-    public virtual Task SuccessAsync(in TResponse? response, CancellationToken cancellationToken = default)
-    {
-        Result = Results.Ok(response);
-        return Task.CompletedTask;
-    }
 
     public virtual Task ValidationError(in IEnumerable<ValidationFailure> failures,
         CancellationToken cancellationToken = default)
